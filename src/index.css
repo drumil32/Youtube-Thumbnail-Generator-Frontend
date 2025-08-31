@@ -120,5 +120,160 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .bg-gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  /* Shadow utilities */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  /* Animation utilities */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
+  /* Animation keyframes */
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(346 100% 60% / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(346 100% 60% / 0.5);
+    }
+  }
+  
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+  
+  /* Enhanced hover effects */
+  .hover-lift {
+    @apply transition-smooth;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+  }
+  
+  /* Glass morphism effect */
+  .glass-card {
+    background: hsl(240 10% 3.9% / 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(240 3.7% 15.9% / 0.5);
+  }
+  
+  /* Enhanced button styles */
+  .btn-primary {
+    @apply bg-gradient-primary text-chat-bubble-foreground font-medium px-6 py-3 rounded-xl;
+    @apply shadow-glow hover-lift transition-smooth;
+    @apply hover:shadow-[0_0_30px_hsl(346_100%_60%_/_0.4)];
+  }
+  
+  .btn-secondary {
+    @apply bg-chat-bubble-secondary text-foreground font-medium px-6 py-3 rounded-xl;
+    @apply border border-border hover-lift transition-smooth;
+    @apply hover:border-primary/50 hover:bg-chat-bubble-secondary/80;
+  }
+  
+  /* Input enhancements */
+  .input-enhanced {
+    @apply bg-background/50 border-border rounded-lg px-4 py-3;
+    @apply focus:border-primary focus:ring-2 focus:ring-primary/20;
+    @apply transition-smooth placeholder:text-muted-foreground;
+  }
+  
+  /* Card enhancements */
+  .card-enhanced {
+    @apply bg-chat-bubble-secondary/30 border-border rounded-2xl p-6;
+    @apply shadow-soft hover-lift transition-smooth;
+    @apply hover:border-primary/30;
+  }
+  
+  /* Progress indicator enhancement */
+  .progress-step {
+    @apply w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold;
+    @apply transition-smooth relative overflow-hidden;
+  }
+  
+  .progress-step.active {
+    @apply bg-gradient-primary text-chat-bubble-foreground shadow-glow;
+  }
+  
+  .progress-step.completed {
+    @apply bg-gradient-primary text-chat-bubble-foreground shadow-glow;
+  }
+  
+  .progress-step.pending {
+    @apply bg-chat-bubble-secondary text-muted-foreground border border-border;
+  }
+  
+  .progress-connector {
+    @apply h-1 rounded transition-smooth;
+  }
+  
+  .progress-connector.completed {
+    @apply bg-gradient-primary shadow-glow;
+  }
+  
+  .progress-connector.pending {
+    @apply bg-border;
   }
 }
