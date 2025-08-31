@@ -155,14 +155,36 @@ export const ThumbnailMaker = () => {
       console.error("Generation failed:", error);
       toast({
         title: "Generation Failed",
-        description: error instanceof Error ? error.message : "An unexpected error occurred",
+        description:
+          (error instanceof Error ? error.message : "An unexpected error occurred") +
+          ". Please refresh the page and try again.",
         variant: "destructive",
       });
     } finally {
       setIsGenerating(false);
     }
   };
-
+  const handleDownload = async () => {
+    if (!generatedImageUrl) return;
+  
+    try {
+      const response = await fetch(generatedImageUrl);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+  
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `thumbnail-${Date.now()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  
+      URL.revokeObjectURL(url); // cleanup
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+  
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -347,35 +369,20 @@ export const ThumbnailMaker = () => {
                 <div className="space-y-4">
                   <div className="text-center">
                     <div className="relative inline-block group">
+                      <a href={generatedImageUrl} target="_blank">
                       <img
                         src={generatedImageUrl}
                         alt="Generated Thumbnail"
                         className="max-w-full h-auto rounded-lg border-2 border-primary/20 mx-auto transition-opacity group-hover:opacity-90"
                         style={{ maxHeight: '400px' }}
                       />
-                      <div 
-                        className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-lg"
-                        onClick={() => {
-                          const link = document.createElement('a');
-                          link.href = generatedImageUrl;
-                          link.download = `thumbnail-${Date.now()}.png`;
-                          link.click();
-                        }}
-                      >
-                        <div className="bg-white/90 rounded-full p-3 transform hover:scale-110 transition-transform">
-                          <Download className="h-6 w-6 text-gray-800" />
-                        </div>
-                      </div>
+                      </a>
+                      
                     </div>
                   </div>
-                  <div className="flex justify-center gap-4">
+                  <div className="flex justify-center gap-4 flex-wrap">
                     <Button
-                      onClick={() => {
-                        const link = document.createElement('a');
-                        link.href = generatedImageUrl;
-                        link.download = `thumbnail-${Date.now()}.png`;
-                        link.click();
-                      }}
+                      onClick={handleDownload}
                       className="btn-primary"
                     >
                       <Download className="mr-2 h-4 w-4" />

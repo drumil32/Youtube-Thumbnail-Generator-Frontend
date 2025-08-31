@@ -20,8 +20,8 @@ export interface ApiResponse {
 class ApiService {
   private baseUrl: string;
 
-  constructor(baseUrl: string = 'https://eeb2042e3be2.ngrok-free.app') {
-    this.baseUrl = baseUrl;
+  constructor() {
+    this.baseUrl = import.meta.env.VITE_API_URL;
   }
 
   async generateThumbnail(request: ThumbnailGenerationRequest): Promise<ApiResponse> {
