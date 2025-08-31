@@ -429,7 +429,7 @@ export const ThumbnailMaker = () => {
         <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold bg-gradient-primary animate-pulse-glow rounded-md bg-clip-text text-black text-transparent mb-2 animate-gradient">
+            <h1 className="text-4xl font-bold bg-gradient-primary animate-pulse-glow rounded-md bg-clip-text text-[#000000] text-transparent mb-2 animate-gradient">
               YouTube Thumbnail Maker
             </h1>
             <p className="text-muted-foreground text-lg">Create amazing thumbnails with our chat-guided experience</p>
