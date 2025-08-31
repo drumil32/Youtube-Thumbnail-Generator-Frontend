@@ -195,7 +195,7 @@ export const ThumbnailMaker = () => {
               <div className="mt-4 p-4 bg-destructive/10 rounded-xl border border-destructive/20">
                 <div className="flex items-center gap-3 text-sm font-medium text-destructive">
                   <AlertTriangle className="h-5 w-5" />
-                  <span>Max file size: 4MB • Supported formats: JPG, PNG, GIF, WebP</span>
+                  <span>Max file size: 4MB • Supported formats: JPG, JPEG, PNG</span>
                 </div>
               </div>
             </ChatBubble>
