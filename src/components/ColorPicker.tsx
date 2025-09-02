@@ -31,15 +31,15 @@ export const ColorPicker = ({ onColorChange, selectedColor }: ColorPickerProps) 
   const [colorType, setColorType] = useState<'simple' | 'gradient'>('simple');
 
   return (
-    <div className="space-y-4">
-      <Label className="text-foreground font-medium">Theme Color</Label>
+    <div className="space-y-3 sm:space-y-4">
+      <Label className="text-foreground font-medium text-xs sm:text-sm">Theme Color</Label>
       
       <div className="flex gap-2">
         <Button
           type="button"
           variant={colorType === 'simple' ? 'default' : 'outline'}
           onClick={() => setColorType('simple')}
-          className="bg-chat-bubble-secondary border-border"
+          className="bg-chat-bubble-secondary border-border text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
         >
           Simple
         </Button>
@@ -47,21 +47,21 @@ export const ColorPicker = ({ onColorChange, selectedColor }: ColorPickerProps) 
           type="button"
           variant={colorType === 'gradient' ? 'default' : 'outline'}
           onClick={() => setColorType('gradient')}
-          className="bg-chat-bubble-secondary border-border"
+          className="bg-chat-bubble-secondary border-border text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
         >
           Gradient
         </Button>
       </div>
 
-      <Card className="p-4 bg-chat-bubble-secondary border-border">
+      <Card className="p-3 sm:p-4 bg-chat-bubble-secondary border-border">
         {colorType === 'simple' ? (
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-3">
             {PRESET_COLORS.map((color, index) => (
               <button
                 key={index}
                 type="button"
                 className={cn(
-                  "w-12 h-12 rounded-lg border-2 transition-all duration-200 hover:scale-110",
+                  "w-8 h-8 sm:w-12 sm:h-12 rounded-lg border-2 transition-all duration-200 hover:scale-110",
                   selectedColor === color ? "border-primary shadow-glow" : "border-border"
                 )}
                 style={{ backgroundColor: color }}
@@ -70,13 +70,13 @@ export const ColorPicker = ({ onColorChange, selectedColor }: ColorPickerProps) 
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
             {GRADIENT_COLORS.map((gradient, index) => (
               <button
                 key={index}
                 type="button"
                 className={cn(
-                  "w-full h-12 rounded-lg border-2 transition-all duration-200 hover:scale-105",
+                  "w-full h-8 sm:h-12 rounded-lg border-2 transition-all duration-200 hover:scale-105",
                   selectedColor === gradient ? "border-primary shadow-glow" : "border-border"
                 )}
                 style={{ background: gradient }}

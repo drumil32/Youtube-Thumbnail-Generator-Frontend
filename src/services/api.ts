@@ -62,11 +62,15 @@ class ApiService {
         body: formData,
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return {
+          success: false,
+          error: result.message || `HTTP error! status: ${response.status}`
+        };
       }
 
-      const result = await response.json();
       return {
         success: result.success,
         url: result.url,
@@ -74,7 +78,42 @@ class ApiService {
       };
 
     } catch (error) {
-      console.error('Thumbnail generation failed:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error occurred'
+      };
+    }
+  }
+
+  async followUp(desc: string, imageUrl: string): Promise<ApiResponse> {
+    try {
+      const response = await fetch(`${this.baseUrl}/follow-up`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          desc,
+          imageUrl
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        return {
+          success: false,
+          error: result.message || `HTTP error! status: ${response.status}`
+        };
+      }
+
+      return {
+        success: result.success,
+        url: result.url,
+        message: result.message
+      };
+
+    } catch (error) {
       return {
         success: false,
         error: error instanceof Error ? error.message : 'Unknown error occurred'

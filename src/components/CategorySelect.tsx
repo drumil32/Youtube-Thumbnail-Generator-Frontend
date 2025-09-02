@@ -18,25 +18,25 @@ const CATEGORIES = [
 
 export const CategorySelect = ({ onCategoryChange, selectedCategory }: CategorySelectProps) => {
   return (
-    <div className="space-y-4">
-      <Label className="text-foreground font-medium">Category</Label>
+    <div className="space-y-3 sm:space-y-4">
+      <Label className="text-foreground font-medium text-xs sm:text-sm">Category</Label>
       
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
         {CATEGORIES.map((category) => (
           <Card
             key={category.id}
             className={cn(
-              "p-4 cursor-pointer transition-all duration-200 hover:scale-105 border",
+              "p-3 sm:p-4 cursor-pointer transition-all duration-200 hover:scale-105 border",
               selectedCategory === category.id 
                 ? "bg-gradient-primary border-primary shadow-glow" 
                 : "bg-chat-bubble-secondary border-border hover:border-primary/50"
             )}
             onClick={() => onCategoryChange(category.id)}
           >
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">{category.icon}</span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="text-lg sm:text-2xl">{category.icon}</span>
               <span className={cn(
-                "font-medium",
+                "font-medium text-xs sm:text-sm",
                 selectedCategory === category.id 
                   ? "text-chat-bubble-foreground" 
                   : "text-foreground"
